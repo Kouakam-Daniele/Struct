@@ -1,0 +1,18 @@
+typedef struct DoubleCircl {
+  int info;
+  struct DoubleCircl *suivant, *precedent;
+} DoubleCircl;
+
+DoubleCircl* insererDebut(DoubleCircl *tete, int donnee) {
+  DoubleCircl *nouveau = malloc(sizeof(DoubleCircl));
+  nouveau->info = donnee;
+  if (!tete) {
+    nouveau->suivant = nouveau->precedent = nouveau;
+    return nouveau;
+  }
+  nouveau->suivant = tete;
+  nouveau->precedent = tete->precedent;
+  tete->precedent->suivant = nouveau;
+  tete->precedent = nouveau;
+  return nouveau;
+}
