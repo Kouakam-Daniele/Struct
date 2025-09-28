@@ -1,0 +1,21 @@
+typedef struct Cellule {
+  int valeur;
+  struct Cellule *suivant;
+} Cellule;
+
+Cellule *insererEnTete(Cellule *fin, int donnee) {
+  Cellule *nouveau = malloc(sizeof(Cellule));
+  nouveau->valeur = donnee;
+  if (!fin) {
+    nouveau->suivant = nouveau;
+    return nouveau;
+  }
+  nouveau->suivant = fin->suivant;
+  fin->suivant = nouveau;
+  return fin;
+}
+
+Chainee *insererEnQueue(Chainee *fin, int donnee) {
+  fin = insererEnTete(fin, donnee);
+  return fin->suivant;
+}
