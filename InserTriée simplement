@@ -1,0 +1,15 @@
+Noeud *inserTrie(Noeud *debut, int valeur)
+{
+  Noeud *nouveau = malloc(sizeof(Noeud));
+  nouveau->valeur = valeur;
+  if (!debut || valeur < debut->valeur) {
+    nouveau->suivant = debut;
+    return nouveau;
+  }
+  Noeud *courant = debut;
+  while (courant->suivant && courant->suivant->valeur < valeur)
+    courant = courant->suivant;
+  nouveau->suivant = courant->suivant;
+  courant->suivant = nouveau;
+  return debut;
+}
