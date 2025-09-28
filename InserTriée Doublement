@@ -1,0 +1,24 @@
+typedef struct DoubleCell {
+    int valeur;
+    struct DoubleCell *precedent, *suivant;
+} DoubleCell;
+
+DoubleCell *inserTrieDouble(DoubleCell *debut, int valeur) {
+    DoubleCell *nouveau = malloc(sizeof(DoubleCell));
+    nouveau->valeur = valeur;
+    if (!debut || valeur < debut->valeur) {
+        nouveau->precedent = NULL;
+        nouveau->suivant = debut;
+        if (debut) debut->precedent = nouveau;
+        return nouveau;
+    }
+    DoubleCell *actuel = debut;
+    while (actuel->suivant && actuel->suivant->valeur < valeur) {
+        actuel = actuel->suivant;
+    }
+    nouveau->suivant = actuel->suivant;
+    nouveau->precedent = actuel;
+    if (actuel->suivant) actuel->suivant->precedent = nouveau;
+    actuel->suivant = nouveau;
+    return debut;
+}
