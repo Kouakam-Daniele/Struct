@@ -1,0 +1,23 @@
+typedef struct Cellule {
+    int valeur;
+    struct Cellule *suivant;
+} Cellule;
+
+Cellule *supTous(Cellule *debut, int cible) {
+    while (debut && debut->valeur == cible) {
+        Cellule *temp = debut;
+        debut = debut->suivant;
+        free(temp);
+    }
+    Cellule *courant = debut;
+    while (courant && courant->suivant) {
+        if (courant->suivant->valeur == cible) {
+            Cellule *temp = courant->suivant;
+            courant->suivant = temp->suivant;
+            free(temp);
+        } else {
+            courant = courant->suivant;
+        }
+    }
+    return 0;
+}
